@@ -6,7 +6,7 @@
   </head>
   <body>
 
-    <h1>Embedded Form Test (updated)</h1>
+    <h1>Embedded Form Test (updated 2)</h1>
     <p>Current page: <code id="current-url"></code></p>
     <script>document.getElementById('current-url').textContent = window.location.href;</script>
 
@@ -20,9 +20,11 @@
       const iframe = document.getElementById('pss-web-form');
 
       iframe.addEventListener('load', () => {
+        console.log(iframe);
+        
         iframe.contentWindow.postMessage(
           { action: 'SET_REFERRING_WEBSITE', referringUrl: window.location.href },
-          'https://enforceable-lela-didactically.ngrok-free.app'
+          'https://enforceable-lela-didactically.ngrok-free.dev'
         );
       });
 
