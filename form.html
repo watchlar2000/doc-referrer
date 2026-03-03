@@ -1,65 +1,45 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
   <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Referrer Test — Form Page</title>
-    <style>
-      body { font-family: monospace; padding: 2rem; }
-      .debug { background: #f4f4f4; border: 1px solid #ccc; padding: 1rem; margin-bottom: 2rem; }
-      .debug dt { font-weight: bold; margin-top: 0.5rem; }
-      .debug dd { margin: 0 0 0.5rem 1rem; word-break: break-all; color: #333; }
-    </style>
+    <title>Embedded Form Test</title>
   </head>
   <body>
 
-    <h1>Form Page</h1>
-    <a href="https://testguy77777.pavementsoft.net/client-portal/web-form/22" referrerpolicy="unsafe-url">Contact Us (test guy - updated)</a>
+    <h1>Embedded Form Test</h1>
+    <p>Current page: <code id="current-url"></code></p>
+    <script>document.getElementById('current-url').textContent = window.location.href;</script>
 
-	     <a href="https://enforceable-lela-didactically.ngrok-free.dev/client-portal/web-form/45" referrerpolicy="unsafe-url">Contact Us (referrerpolicy="unsafe-url")</a>
-
-	  
-	  
-    <div class="debug">
-      <h2>Referrer debug</h2>
-      <dl>
-        <dt>document.referrer (raw)</dt>
-        <dd id="out-referrer">—</dd>
-
-        <dt>window.location.href (current page)</dt>
-        <dd id="out-current">—</dd>
-      </dl>
-    </div>
     <iframe id="pss-web-form"
-      src="https://enforceable-lela-didactically.ngrok-free.dev/api/public/web-form/45"
+      src="https://enforceable-lela-didactically.ngrok-free.app/api/public/web-form/45"
       frameborder="0"
-      style="position: static; display: block;
-      width: 100%; border: none; overflow: hidden;">
+      style="display: block; width: 100%; border: none; overflow: hidden; min-height: 200px;">
     </iframe>
 
-  <script>
- 	window.addEventListener('message', (event) => {
-	 	switch (event.data?.action) {
-			case 'SET_PSS_WEB_FORM_HEIGHT': {
-				document.getElementById("pss-web-form").style.height = (event.data.height + 30) + 'px';
-				break;
-			}
-			case 'PSS_WEB_FORM_REDIRECT': {
-				window.location.href = event.data.redirectUrl;
-				break;
-			}
-			default: {
-				break;
-			}
-		}	
-	});
+    <script>
+      const iframe = document.getElementById('pss-web-form');
 
-	const inputReferringWebsite = document.getElementById('referringWebsite');
+      iframe.addEventListener('load', () => {
+        iframe.contentWindow.postMessage(
+          { action: 'SET_REFERRING_WEBSITE', referringUrl: window.location.href },
+          'https://enforceable-lela-didactically.ngrok-free.app'
+        );
+      });
 
-	if (inputReferringWebsite) {
-		inputReferringWebsite.value = document.referrer
-			? document.referrer
-			: '';
-	}
-  </script>
+      window.addEventListener('message', (event) => {
+        switch (event.data?.action) {
+          case 'SET_PSS_WEB_FORM_HEIGHT': {
+            document.getElementById('pss-web-form').style.height = (event.data.height + 30) +
+  'px';
+            break;
+          }
+          case 'PSS_WEB_FORM_REDIRECT': {
+            window.location.href = event.data.redirectUrl;
+            break;
+          }
+        }
+      });
+    </script>
+
   </body>
   </html>
