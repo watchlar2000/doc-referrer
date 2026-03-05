@@ -6,7 +6,7 @@
   </head>
   <body>
 
-    <h1>Embedded Form Test (updated 2)</h1>
+    <h1>Embedded Form Test (updated 3)</h1>
     <p>Current page: <code id="current-url"></code></p>
     <script>document.getElementById('current-url').textContent = window.location.href;</script>
 
@@ -28,6 +28,7 @@
 		if (!iframe) return;
 
 		iframe.addEventListener('load', () => {
+			console.log('sending message ', window.location.href);
 			iframe.contentWindow.postMessage(
 				{ action: 'SET_REFERRING_WEBSITE', referringWebsite: window.location.href },
 				'https://weeklytest.pavementsoft.net'
