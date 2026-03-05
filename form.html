@@ -10,38 +10,43 @@
     <p>Current page: <code id="current-url"></code></p>
     <script>document.getElementById('current-url').textContent = window.location.href;</script>
 
-    <iframe id="pss-web-form"
-      src="https://enforceable-lela-didactically.ngrok-free.dev/api/public/web-form/45"
-      frameborder="0"
-      style="display: block; width: 100%; border: none; overflow: hidden; min-height: 200px;">
-    </iframe>
+    <a href="https://weeklytest.pavementsoft.net/client-portal/web-form/45">Contact Us - weeklytest</a>
 
-    <script>
-      const iframe = document.getElementById('pss-web-form');
+<iframe id="pss-web-form"
+		src="https://weeklytest.pavementsoft.net/api/public/web-form/45"
+		frameborder="0"
+		style="position: static; display: block;
+		width: 100%; border: none; overflow: hidden;">
+	</iframe>
 
-      iframe.addEventListener('load', () => {
-        console.log(iframe);
-        
-        iframe.contentWindow.postMessage(
-          { action: 'SET_REFERRING_WEBSITE', referringUrl: window.location.href },
-          'https://enforceable-lela-didactically.ngrok-free.dev'
-        );
-      });
+    
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const iframe = document.getElementById('pss-web-form');
 
-      window.addEventListener('message', (event) => {
-        switch (event.data?.action) {
-          case 'SET_PSS_WEB_FORM_HEIGHT': {
-            document.getElementById('pss-web-form').style.height = (event.data.height + 30) +
-  'px';
-            break;
-          }
-          case 'PSS_WEB_FORM_REDIRECT': {
-            window.location.href = event.data.redirectUrl;
-            break;
-          }
-        }
-      });
-    </script>
+		if (!iframe) return;
+
+		iframe.addEventListener('load', () => {
+			iframe.contentWindow.postMessage(
+				{ action: 'SET_REFERRING_WEBSITE', referringWebsite: window.location.href },
+				'https://weeklytest.pavementsoft.net'
+			);
+		});
+
+		window.addEventListener('message', (event) => {
+			switch (event.data?.action) {
+				case 'SET_PSS_WEB_FORM_HEIGHT': {
+					iframe.style.height = (event.data.height + 30) + 'px';
+					break;
+				}
+				case 'PSS_WEB_FORM_REDIRECT': {
+					window.location.href = event.data.redirectUrl;
+					break;
+				}
+			}
+		});
+	});
+</script>
 
   </body>
   </html>
