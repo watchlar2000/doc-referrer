@@ -6,7 +6,7 @@
   </head>
   <body>
 
-    <h1>Embedded Form Test (updated 6)</h1>
+    <h1>Embedded Form Test (updated 7)</h1>
     <p>Current page: <code id="current-url"></code></p>
     <script>document.getElementById('current-url').textContent = window.location.href;</script>
 
@@ -21,6 +21,7 @@
 
     
 
+
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
 		const iframe = document.getElementById('pss-web-form');
@@ -30,7 +31,7 @@
 		iframe.addEventListener('load', () => {
 			iframe.contentWindow.postMessage(
 				{ action: 'SET_REFERRING_WEBSITE', referringWebsite: window.location.href },
-				'http://localhost:5500'
+				'https://weeklytest.pavementsoft.net'
 			);
 		});
 
