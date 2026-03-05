@@ -6,29 +6,21 @@
   </head>
   <body>
 
-    <h1>Embedded Form Test (updated 5)</h1>
+    <h1>Embedded Form Test (updated 6)</h1>
     <p>Current page: <code id="current-url"></code></p>
     <script>document.getElementById('current-url').textContent = window.location.href;</script>
 
-    <a href="https://weeklytest.pavementsoft.net/client-portal/web-form/45" referrerpolicy="unsafe-url">Contact Us - weeklytest</a>
-    <!-- <a href="https://enforceable-lela-didactically.ngrok-free.dev/client-portal/web-form/45">Contact Us - local</a> -->
+<a href="https://weeklytest.pavementsoft.net/client-portal/web-form/45" referrerpolicy="unsafe-url">Contact Us</a>
 
-<!-- <iframe id="pss-web-form"
-		src="https://enforceable-lela-didactically.ngrok-free.dev/api/public/web-form/45"
-		frameborder="0"
-		style="position: static; display: block;
-		width: 100%; border: none; overflow: hidden;">
-	</iframe> -->
-
-	  
-	<iframe id="pss-web-form"
-		src="https://weeklytest.pavementsoft.net/api/public/web-form/45"
+<iframe id="pss-web-form"
+		src="http://localhost:5500/api/public/web-form/45"
 		frameborder="0"
 		style="position: static; display: block;
 		width: 100%; border: none; overflow: hidden;">
 	</iframe>
 
     
+
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
 		const iframe = document.getElementById('pss-web-form');
@@ -36,10 +28,9 @@
 		if (!iframe) return;
 
 		iframe.addEventListener('load', () => {
-			console.log('sending message ', window.location.href);
 			iframe.contentWindow.postMessage(
 				{ action: 'SET_REFERRING_WEBSITE', referringWebsite: window.location.href },
-				'https://weeklytest.pavementsoft.net'
+				'http://localhost:5500'
 			);
 		});
 
